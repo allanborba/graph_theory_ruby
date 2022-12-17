@@ -3,7 +3,7 @@ require 'graph/core/vertex'
 describe Vertex do
   describe '#initialize' do
     context "when argument is nil" do
-      it {expect{described_class.new(nil)}.to raise_error(ArgumentError, 'Blank label not allowed')}
+      it {expect{described_class.new(nil)}.to raise_error(ArgumentError, 'Label must be a String')}
     end
 
     context "when argument is empty" do
