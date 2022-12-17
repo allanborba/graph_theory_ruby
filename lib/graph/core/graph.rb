@@ -2,7 +2,7 @@ class Graph
   attr_reader :vertices, :indexed_label
 
   def initialize(max_vertices_allowed = 10)
-    raise ArgumentError.new('Max vertices must be a number') unless max_vertices_allowed.class == Integer
+    raise ArgumentError.new('Max vertices must be a number') unless max_vertices_allowed.instance_of?(Integer)
     raise ArgumentError.new('Max vertices must be equal or greater than one') if max_vertices_allowed < 1
 
     @max_vertices_allowed = max_vertices_allowed
