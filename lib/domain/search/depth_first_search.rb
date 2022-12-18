@@ -1,7 +1,7 @@
 require "singleton"
 require_relative "path"
 
-class DepthFristSearch
+class DepthFirstSearch
   include Singleton
 
   def search(graph, beginning, destination)

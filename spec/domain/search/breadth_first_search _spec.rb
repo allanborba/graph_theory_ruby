@@ -1,7 +1,7 @@
-require "domain/search/depth_first_search"
+require "domain/search/breadth_first_search"
 require_relative "../../graph_helper"
 
-describe DepthFristSearch do
+describe BreadthFristSearch do
   describe "#search" do
     let(:graph) { generate_graph }
     let(:path_result) { ["A", "D", "G"] }
