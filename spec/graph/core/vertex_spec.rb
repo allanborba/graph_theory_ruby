@@ -1,4 +1,4 @@
-require 'graph/core/vertex'
+require 'domain/core/vertex'
 
 describe Vertex do
   describe '#initialize' do

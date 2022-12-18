@@ -1,5 +1,5 @@
-require 'graph/core/graph'
-require 'graph/core/vertex'
+require 'domain/core/graph'
+require 'domain/core/vertex'
 
 describe Graph do
   describe '#initialize' do

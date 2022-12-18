@@ -1,4 +1,4 @@
-require 'graph/core/adjacency_matrix'
+require 'domain/core/adjacency_matrix'
 
 describe AdjacencyMatrix do
   let(:vertex_A) {Vertex.new('A')}

@@ -35,6 +35,10 @@ class Graph
     adjacency_matrix.get_adjacencies(index_by_label[label])
   end
 
+  def get_vertex(label)
+    vertices[index_by_label[label]]
+  end
+
   private
 
   def validate_label_existence(initial, final)
