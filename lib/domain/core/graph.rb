@@ -39,11 +39,11 @@ class Graph
     vertices[index_by_label[label]]
   end
 
-  private
-
   def validate_label_existence(initial, final)
     raise ArgumentError.new('Label must exist') if index_by_label[initial].nil? || index_by_label[final].nil?
   end
+
+  private
 
   def adjacency_matrix
     @adjacency_matrix ||= AdjacencyMatrix.new(vertices)
