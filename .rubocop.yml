@@ -1,0 +1,11 @@
+AllCops:
+  TargetRubyVersion: 2.6.5
+  NewCops: enable
+
+
+Style/Documentation:
+  Enabled: false
+
+Style/WordArray:
+  Enabled: true
+  EnforcedStyle: brackets
