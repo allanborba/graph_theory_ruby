@@ -9,3 +9,7 @@ Style/Documentation:
 Style/WordArray:
   Enabled: true
   EnforcedStyle: brackets
+
+convention:Style/StringLiterals:
+  Enabled: true
+  EnforcedStyle: double_quotes

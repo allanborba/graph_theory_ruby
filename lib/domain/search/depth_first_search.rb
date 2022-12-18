@@ -1,11 +1,11 @@
-require 'singleton'
-require_relative 'path'
+require "singleton"
+require_relative "path"
 
 class DepthFristSearch
   include Singleton
 
   def search(graph, beginning, destination)
-    raise ArgumentError, 'graph must be a Graph type' unless graph.is_a?(Graph)
+    raise ArgumentError, "graph must be a Graph type" unless graph.is_a?(Graph)
 
     graph.validate_label_existence(beginning, destination)
 

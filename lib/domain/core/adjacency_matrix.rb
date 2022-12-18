@@ -2,15 +2,15 @@ class AdjacencyMatrix
   attr_reader :vertices, :matrix
 
   def initialize(vertices)
-    raise ArgumentError, 'Argument must be a list of vertices' if vertices.any?{|v| !v.instance_of?(Vertex)}
+    raise ArgumentError, "Argument must be a list of vertices" if vertices.any?{|v| !v.instance_of?(Vertex)}
 
     @vertices = vertices
     initialize_matrix
   end
 
   def add_edge(initial_vertex_index, final_vertex_index)
-    raise ArgumentError, 'index must be a number' unless initial_vertex_index.instance_of?(Integer) && final_vertex_index.instance_of?(Integer)
-    raise ArgumentError, 'index must be inside matrix size' if initial_vertex_index > vertices.size || final_vertex_index > vertices.size
+    raise ArgumentError, "index must be a number" unless initial_vertex_index.instance_of?(Integer) && final_vertex_index.instance_of?(Integer)
+    raise ArgumentError, "index must be inside matrix size" if initial_vertex_index > vertices.size || final_vertex_index > vertices.size
 
     matrix[initial_vertex_index][final_vertex_index] = 1
     vertices[initial_vertex_index].add_degree
