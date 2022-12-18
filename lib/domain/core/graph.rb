@@ -1,3 +1,6 @@
+require_relative 'vertex'
+require_relative '../core/adjacency_matrix'
+
 class Graph
   attr_reader :vertices, :index_by_label
 
