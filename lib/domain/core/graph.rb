@@ -5,8 +5,8 @@ class Graph
   attr_reader :vertices, :index_by_label
 
   def initialize(max_vertices_allowed = 10)
-    raise ArgumentError.new('Max vertices must be a number') unless max_vertices_allowed.instance_of?(Integer)
-    raise ArgumentError.new('Max vertices must be equal or greater than one') if max_vertices_allowed < 1
+    raise ArgumentError, 'Max vertices must be a number' unless max_vertices_allowed.instance_of?(Integer)
+    raise ArgumentError, 'Max vertices must be equal or greater than one' if max_vertices_allowed < 1
 
     @max_vertices_allowed = max_vertices_allowed
     @vertices = []
@@ -15,7 +15,7 @@ class Graph
   end
 
   def add_vertex(label)
-    raise ArgumentError.new('Max allowed vertices has been exceeded') if vertices.size == @max_vertices_allowed
+    raise ArgumentError, 'Max allowed vertices has been exceeded' if vertices.size == @max_vertices_allowed
 
     index_by_label[label] = @vertex_index
     vertices << Vertex.new(label)
@@ -23,7 +23,7 @@ class Graph
   end
 
   def connect_vertex_by_label(initial, final)
-    raise ArgumentError.new('Label must be a String') unless initial.instance_of?(String) && final.instance_of?(String)
+    raise ArgumentError, 'Label must be a String' unless initial.instance_of?(String) && final.instance_of?(String)
 
     validate_label_existence(initial, final)
 
@@ -33,7 +33,7 @@ class Graph
   end
 
   def get_adjacencies(label)
-    raise ArgumentError.new('Label must exist') if index_by_label[label].nil?
+    raise ArgumentError, 'Label must exist' if index_by_label[label].nil?
 
     adjacency_matrix.get_adjacencies(index_by_label[label])
   end
@@ -43,7 +43,7 @@ class Graph
   end
 
   def validate_label_existence(initial, final)
-    raise ArgumentError.new('Label must exist') if index_by_label[initial].nil? || index_by_label[final].nil?
+    raise ArgumentError, 'Label must exist' if index_by_label[initial].nil? || index_by_label[final].nil?
   end
 
   private
