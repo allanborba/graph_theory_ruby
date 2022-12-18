@@ -7,7 +7,7 @@ class BreadthFristSearch
   def search(graph, beginning, destination)
     raise ArgumentError, "graph must be a Graph type" unless graph.is_a?(Graph)
 
-    graph.validate_label_existence(beginning, destination)
+    graph.validate_label_existence([beginning, destination])
 
     fifo = []
     visited_vertices = []

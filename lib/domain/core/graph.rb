@@ -25,7 +25,7 @@ class Graph
   def connect_vertex_by_label(initial, final)
     raise ArgumentError, "Label must be a String" unless initial.instance_of?(String) && final.instance_of?(String)
 
-    validate_label_existence(initial, final)
+    validate_label_existence([initial, final])
 
     initial_vertex_index = index_by_label[initial]
     final_vertex_index = index_by_label[final]
@@ -33,7 +33,7 @@ class Graph
   end
 
   def get_adjacencies(label)
-    raise ArgumentError, "Label must exist" if index_by_label[label].nil?
+    validate_label_existence([label])
 
     adjacency_matrix.get_adjacencies(index_by_label[label])
   end
@@ -42,8 +42,8 @@ class Graph
     vertices[index_by_label[label]]
   end
 
-  def validate_label_existence(initial, final)
-    raise ArgumentError, "Label must exist" if index_by_label[initial].nil? || index_by_label[final].nil?
+  def validate_label_existence(labels)
+    raise ArgumentError, "Label must exist" if labels.any? { |l| index_by_label[l].nil? }
   end
 
   private
