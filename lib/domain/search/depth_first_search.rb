@@ -7,8 +7,6 @@ class DepthFirstSearch
   def search(graph, beginning, destination)
     raise ArgumentError, "graph must be a Graph type" unless graph.is_a?(Graph)
 
-    graph.validate_label_existence([beginning, destination])
-
     stack = []
     visited_vertices = []
     path = Path.new

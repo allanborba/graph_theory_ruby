@@ -42,10 +42,6 @@ class Graph
     vertices[index_by_label[label]]
   end
 
-  def validate_label_existence(labels)
-    raise ArgumentError, "Label must exist" if labels.any? { |l| index_by_label[l].nil? }
-  end
-
   def spanning_tree_by_depth
     tree = Graph.new(@max_vertices_allowed)
     stack = []
@@ -77,6 +73,10 @@ class Graph
 
   def adjacency_matrix
     @adjacency_matrix ||= AdjacencyMatrix.new(vertices)
+  end
+
+  def validate_label_existence(labels)
+    raise ArgumentError, "Label must exist" if labels.any? { |l| index_by_label[l].nil? }
   end
 
   def get_next_vertex(vertex, vertices_hash)

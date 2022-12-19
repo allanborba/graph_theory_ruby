@@ -15,6 +15,7 @@ describe BreadthFristSearch do
 
     context "when vertices dont belong to graph" do
       it do
+        debugger
         expect { described_class.instance.search(graph, "X", "Z") }.to raise_error(ArgumentError, "Label must exist")
       end
     end
