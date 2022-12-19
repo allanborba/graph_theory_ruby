@@ -46,9 +46,47 @@ class Graph
     raise ArgumentError, "Label must exist" if labels.any? { |l| index_by_label[l].nil? }
   end
 
+  def spanning_tree_by_depth
+    tree = Graph.new(@max_vertices_allowed)
+    stack = []
+    visited_vertices = {}
+
+    vertices.each { |v| tree.add_vertex(v.label) }
+
+    visited_vertices[0] = vertices[0].label
+    stack << vertices[0]
+
+    while stack.any?
+      vertex = stack.last
+      next_vertex = get_next_vertex(vertex, visited_vertices)
+
+      if next_vertex.nil?
+        stack.pop
+      else
+        index = index_by_label[next_vertex.label]
+        visited_vertices[index] = next_vertex.label
+        stack << next_vertex
+        tree.connect_vertex_by_label(vertex.label, next_vertex.label)
+      end
+    end
+
+    tree
+  end
+
   private
 
   def adjacency_matrix
     @adjacency_matrix ||= AdjacencyMatrix.new(vertices)
+  end
+
+  def get_next_vertex(vertex, vertices_hash)
+    adjacencies = get_adjacencies(vertex.label)
+    adjacencies.each do |adjacency|
+      index = index_by_label[adjacency.label]
+
+      return adjacency if vertices_hash[index].nil?
+    end
+
+    nil
   end
 end

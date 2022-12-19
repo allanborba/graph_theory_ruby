@@ -8,17 +8,17 @@ describe Graph do
     end
 
     context "when the argument number less then 1" do
-      it {expect{described_class.new(0)}.to raise_error(ArgumentError, "Max vertices must be equal or greater than one")}
+      it { expect{described_class.new(0)}.to raise_error(ArgumentError, "Max vertices must be equal or greater than one") }
     end
   end
 
   describe "#add_vertex" do
     context "when the number of vertices exceed the max allowed" do
-    let(:graph) {described_class.new(1)}
+      let(:graph) {described_class.new(1)}
 
-    before {graph.add_vertex("A")}
+      before { graph.add_vertex("A")}
 
-      it {expect{graph.add_vertex("B")}.to raise_error(ArgumentError, "Max allowed vertices has been exceeded")}
+      it { expect{ graph.add_vertex("B") }.to raise_error(ArgumentError, "Max allowed vertices has been exceeded") }
     end
 
     context "when the number of vertices is valid" do
@@ -80,4 +80,24 @@ describe Graph do
       it {expect {graph.get_adjacencies("C")}.to raise_error(ArgumentError, "Label must exist")}
     end
   end
+
+  describe "#spanning_tree_by_depth" do
+    let(:graph) { described_class.new }
+    let(:tree) { graph.spanning_tree_by_depth}
+
+    before do
+      graph.add_vertex("A")
+      graph.add_vertex("B")
+      graph.add_vertex("C")
+
+      graph.connect_vertex_by_label("A", "B");
+      graph.connect_vertex_by_label("B", "C");
+      graph.connect_vertex_by_label("A", "C");
+    end
+
+    it { expect(tree.get_adjacencies("A").map(&:label)).to eq(["B"]) }
+    it { expect(tree.get_adjacencies("B").map(&:label)).to eq(["A", "C"]) }
+    it { expect(tree.get_adjacencies("C").map(&:label)).to eq(["B"]) }
+  end
+
 end
