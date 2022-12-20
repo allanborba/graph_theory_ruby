@@ -22,14 +22,12 @@ class Graph
     @vertex_index += 1
   end
 
-  def connect_vertex_by_label(initial, final)
-    raise ArgumentError, "Label must be a String" unless initial.instance_of?(String) && final.instance_of?(String)
-
+  def connect_vertex_by_label(initial, final, weight = 1)
     validate_label_existence([initial, final])
 
     initial_vertex_index = index_by_label[initial]
     final_vertex_index = index_by_label[final]
-    adjacency_matrix.add_edge(initial_vertex_index, final_vertex_index)
+    adjacency_matrix.add_edge(initial_vertex_index, final_vertex_index, weight)
   end
 
   def get_adjacencies(label)
@@ -40,6 +38,13 @@ class Graph
 
   def get_vertex(label)
     vertices[index_by_label[label]]
+  end
+
+  def get_weight(initial_label, final_label)
+    initial_index = index_by_label[initial_label]
+    final_index = index_by_label[final_label]
+
+    adjacency_matrix.matrix[initial_index][final_index]
   end
 
   def spanning_tree_by_depth
@@ -69,13 +74,14 @@ class Graph
     tree
   end
 
-  private
+  protected
 
   def adjacency_matrix
     @adjacency_matrix ||= AdjacencyMatrix.new(vertices)
   end
 
   def validate_label_existence(labels)
+    raise ArgumentError, "Label must be a String" if labels.any? { |l| !l.instance_of?(String) }
     raise ArgumentError, "Label must exist" if labels.any? { |l| index_by_label[l].nil? }
   end
 
