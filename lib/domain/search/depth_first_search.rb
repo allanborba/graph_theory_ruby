@@ -8,7 +8,7 @@ class DepthFirstSearch
     raise ArgumentError, "graph must be a Graph type" unless graph.is_a?(Graph)
 
     stack = []
-    visited_vertices = []
+    visited_vertices = {}
     path = Path.new
 
     stack << beginning
@@ -19,10 +19,11 @@ class DepthFirstSearch
 
       graph.get_adjacencies(vertex).each do |adjacent_vertex|
         label = adjacent_vertex.label
+        index = graph.index_by_label[label]
 
-        next if visited_vertices.include?(label)
+        next unless visited_vertices[index].nil?
 
-        visited_vertices << label
+        visited_vertices[index] = label
         path.connect(label, vertex)
         stack << label
       end

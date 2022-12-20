@@ -8,7 +8,7 @@ class BreadthFristSearch
     raise ArgumentError, "graph must be a Graph type" unless graph.is_a?(Graph)
 
     fifo = []
-    visited_vertices = []
+    visited_vertices = {}
     path = Path.new
 
     fifo << beginning
@@ -19,10 +19,11 @@ class BreadthFristSearch
 
       graph.get_adjacencies(vertex).each do |adjacent_vertex|
         label = adjacent_vertex.label
+        index = graph.index_by_label[label]
 
-        next if visited_vertices.include?(label)
+        next unless visited_vertices[index].nil?
 
-        visited_vertices << label
+        visited_vertices[index] = label
         path.connect(label, vertex)
         fifo << label
       end
