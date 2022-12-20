@@ -38,8 +38,8 @@ class AdjacencyMatrix
 
     adjacencies = []
 
-    vertices.size.times do |i|
-      adjacencies << vertices[i] if matrix[vertex_index][i] == 1
+    matrix_size.times do |i|
+      adjacencies << vertices[i] if matrix[vertex_index][i] != 1
     end
 
     adjacencies
