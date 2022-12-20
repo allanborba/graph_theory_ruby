@@ -14,12 +14,12 @@ class AdjacencyMatrix
     validate_vertices_index([initial_vertex_index, final_vertex_index])
     validate_weight(weight)
 
-    matrix[initial_vertex_index][final_vertex_index] = 1
+    write_in_matrix(initial_vertex_index, final_vertex_index, weight)
     vertices[initial_vertex_index].add_degree
 
     return if initial_vertex_index == final_vertex_index
 
-    matrix[final_vertex_index][initial_vertex_index] = 1
+    write_in_matrix(final_vertex_index, initial_vertex_index, weight)
     vertices[final_vertex_index].add_degree
   end
 
@@ -34,6 +34,8 @@ class AdjacencyMatrix
   end
 
   def get_adjacencies(vertex_index)
+    validate_vertices_index([vertex_index])
+
     adjacencies = []
 
     vertices.size.times do |i|
@@ -44,8 +46,7 @@ class AdjacencyMatrix
   end
 
   def copy_matrix_values(destination_matrix)
-    raise ArgumentError, "Argument must be a Matrix" unless destination_matrix.is_a?(AdjacencyMatrix)
-    raise ArgumentError, "Matrix must have same size" unless destination_matrix.matrix_size == matrix_size
+    validate_matrix(destination_matrix)
 
     matrix_size.times do |i|
       matrix_size.times { |j| destination_matrix.write_in_matrix(i, j, matrix[i][j]) }
@@ -66,7 +67,12 @@ class AdjacencyMatrix
   end
 
   def validate_weight(weight)
-    raise ArgumentError, "weight must be a number" if weight.instance_of?(Integer)
+    raise ArgumentError, "weight must be a number" unless weight.instance_of?(Integer)
+  end
+
+  def validate_matrix(matrix)
+    raise ArgumentError, "Argument must be a Matrix" unless matrix.is_a?(AdjacencyMatrix)
+    raise ArgumentError, "Matrix must have same size" unless matrix.matrix_size == matrix_size
   end
 
   protected

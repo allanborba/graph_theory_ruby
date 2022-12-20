@@ -26,11 +26,33 @@ describe AdjacencyMatrix do
 
   describe "#add_edge" do
     let(:adjacency_matrix) { described_class.new(vertices) }
-    let(:result_matrix) { [[0, 0, 0, 0], [0, 0, 0, 1], [0, 0, 0, 0], [0, 1, 0, 0]] }
 
-    before { adjacency_matrix.add_edge(1, 3) }
+    context "when the vertices are not a number" do
+      it { expect { adjacency_matrix.add_edge("1", 3) }.to raise_error(ArgumentError, "index must be a number") }
+    end
 
-    context "when add edge" do
+    context "when the index not present in vertices" do
+      it { expect { adjacency_matrix.add_edge(1, 5) }.to raise_error(ArgumentError, "index must be inside matrix size") }
+    end
+
+    context "when the weight is not a number" do
+      it { expect { adjacency_matrix.add_edge(1, 3, "1") }.to raise_error(ArgumentError, "weight must be a number") }
+    end
+
+    context "when add edge with no weight" do
+      let(:result_matrix) { [[0, 0, 0, 0], [0, 0, 0, 1], [0, 0, 0, 0], [0, 1, 0, 0]] }
+
+      before { adjacency_matrix.add_edge(1, 3) }
+
+      it("change the value of matrix") { expect(adjacency_matrix.matrix).to eq(result_matrix) }
+      it("change the degree of each vertex") { expect(vertices.map(&:degree)).to eq([0, 1, 0, 1]) }
+    end
+
+    context "when add edge with weight" do
+      let(:result_matrix) { [[0, 0, 0, 0], [0, 0, 0, 5], [0, 0, 0, 0], [0, 5, 0, 0]] }
+
+      before { adjacency_matrix.add_edge(1, 3, 5) }
+
       it("change the value of matrix") { expect(adjacency_matrix.matrix).to eq(result_matrix) }
       it("change the degree of each vertex") { expect(vertices.map(&:degree)).to eq([0, 1, 0, 1]) }
     end
