@@ -105,7 +105,7 @@ describe AdjacencyMatrix do
   describe "#get_adjacencies" do
     let(:adjacency_matrix) { described_class.new(vertices) }
 
-    before { adjacency_matrix.add_edge(1, 3) }
+    before { adjacency_matrix.add_edge(1, 3, 5) }
 
     it("returns the adjacencies") { expect(adjacency_matrix.get_adjacencies(1)).to eq([vertex_D]) }
   end
