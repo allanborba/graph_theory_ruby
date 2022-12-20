@@ -39,7 +39,7 @@ class AdjacencyMatrix
     adjacencies = []
 
     matrix_size.times do |i|
-      adjacencies << vertices[i] if matrix[vertex_index][i] != 1
+      adjacencies << vertices[i] if matrix[vertex_index][i] != 0
     end
 
     adjacencies
