@@ -1,11 +1,11 @@
 class AdjacencyMatrix
-  attr_reader :vertices, :ancesters, :matrix_size, :matrix
+  attr_reader :vertices, :ancestors, :matrix_size, :matrix
 
   def initialize(vertices)
     raise ArgumentError, "Argument must be a list of vertices" if vertices.any? { |v| !v.instance_of?(Vertex) }
 
     @vertices = vertices
-    @ancesters = {}
+    @ancestors = Hash.new {|hash, k| hash[k] = []}
     @matrix_size = vertices.size
     initialize_matrix
   end
@@ -30,14 +30,13 @@ class AdjacencyMatrix
     write_in_matrix(initial_vertex_index, final_vertex_index, weight)
     vertices[final_vertex_index].add_degree
 
-    ancesters[final_vertex_index] = vertices[initial_vertex_index]
+    ancestors[final_vertex_index] << vertices[initial_vertex_index]
   end
 
   def get_adjacencies(vertex_index)
     validate_vertices_index([vertex_index])
 
     adjacencies = []
-
     matrix_size.times do |i|
       adjacencies << vertices[i] if matrix[vertex_index][i] != 0
     end
