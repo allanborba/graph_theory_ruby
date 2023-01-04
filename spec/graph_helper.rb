@@ -1,3 +1,5 @@
+require "domain/core/graph"
+
 def generate_graph
   graph = Graph.new
 
