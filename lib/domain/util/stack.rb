@@ -9,18 +9,14 @@ class Stack
 
   def add(value)
     node = { value: value, next: nil }
-    if length == 0
-      set_bottom(node)
-    else
-      node[:next] = top
-    end
+    length.zero? ? set_bottom(node) : node[:next] = top
 
     set_top(node)
     incress_length
   end
 
   def remove
-    return if length == 0
+    return if length.zero?
 
     item_to_remove = top
 
@@ -39,7 +35,7 @@ class Stack
     length > 0
   end
 
-  private
+  protected
 
   def set_top(node)
     @top = node
