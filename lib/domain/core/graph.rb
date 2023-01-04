@@ -36,10 +36,6 @@ class Graph
     adjacency_matrix.get_adjacencies(index_by_label[label])
   end
 
-  def get_vertex(label)
-    vertices[index_by_label[label]]
-  end
-
   def get_weight(initial_label, final_label)
     initial_index = index_by_label[initial_label]
     final_index = index_by_label[final_label]
